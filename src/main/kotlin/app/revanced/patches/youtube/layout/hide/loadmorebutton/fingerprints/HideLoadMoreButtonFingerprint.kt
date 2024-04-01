@@ -5,7 +5,8 @@ import app.revanced.util.patch.LiteralValueFingerprint
 import com.android.tools.smali.dexlib2.Opcode
 
 internal object HideLoadMoreButtonFingerprint : LiteralValueFingerprint(
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CONST,
         Opcode.CONST_4,
         Opcode.INVOKE_STATIC,

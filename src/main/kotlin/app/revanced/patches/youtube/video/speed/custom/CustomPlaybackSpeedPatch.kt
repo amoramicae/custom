@@ -62,8 +62,9 @@ object CustomPlaybackSpeedPatch : BytecodePatch(
         val arrayGenMethod = SpeedArrayGeneratorFingerprint.result?.mutableMethod!!
         val arrayGenMethodImpl = arrayGenMethod.implementation!!
 
-        val sizeCallIndex = arrayGenMethodImpl.instructions
-            .indexOfFirst { ((it as? ReferenceInstruction)?.reference as? MethodReference)?.name == "size" }
+        val sizeCallIndex =
+            arrayGenMethodImpl.instructions
+                .indexOfFirst { ((it as? ReferenceInstruction)?.reference as? MethodReference)?.name == "size" }
 
         if (sizeCallIndex == -1) throw PatchException("Couldn't find call to size()")
 
@@ -75,8 +76,9 @@ object CustomPlaybackSpeedPatch : BytecodePatch(
             "const/4 v$sizeCallResultRegister, 0x0"
         )
 
-        val (arrayLengthConstIndex, arrayLengthConst) = arrayGenMethodImpl.instructions.withIndex()
-            .first { (it.value as? NarrowLiteralInstruction)?.narrowLiteral == 7 }
+        val (arrayLengthConstIndex, arrayLengthConst) =
+            arrayGenMethodImpl.instructions.withIndex()
+                .first { (it.value as? NarrowLiteralInstruction)?.narrowLiteral == 7 }
 
         val arrayLengthConstDestination = (arrayLengthConst as OneRegisterInstruction).registerA
 
@@ -90,12 +92,13 @@ object CustomPlaybackSpeedPatch : BytecodePatch(
             """
         )
 
-        val (originalArrayFetchIndex, originalArrayFetch) = arrayGenMethodImpl.instructions.withIndex()
-            .first {
-                val reference = ((it.value as? ReferenceInstruction)?.reference as? FieldReference)
-                reference?.definingClass?.contains("PlayerConfigModel") ?: false &&
+        val (originalArrayFetchIndex, originalArrayFetch) =
+            arrayGenMethodImpl.instructions.withIndex()
+                .first {
+                    val reference = ((it.value as? ReferenceInstruction)?.reference as? FieldReference)
+                    reference?.definingClass?.contains("PlayerConfigModel") ?: false &&
                         reference?.type == "[F"
-            }
+                }
 
         val originalArrayFetchDestination = (originalArrayFetch as OneRegisterInstruction).registerA
 
@@ -109,10 +112,12 @@ object CustomPlaybackSpeedPatch : BytecodePatch(
 
         val lowerLimitConst = 0.25f.toRawBits()
         val upperLimitConst = 2.0f.toRawBits()
-        val (limiterMinConstIndex, limiterMinConst) = limiterMethodImpl.instructions.withIndex()
-            .first { (it.value as? NarrowLiteralInstruction)?.narrowLiteral == lowerLimitConst }
-        val (limiterMaxConstIndex, limiterMaxConst) = limiterMethodImpl.instructions.withIndex()
-            .first { (it.value as? NarrowLiteralInstruction)?.narrowLiteral == upperLimitConst }
+        val (limiterMinConstIndex, limiterMinConst) =
+            limiterMethodImpl.instructions.withIndex()
+                .first { (it.value as? NarrowLiteralInstruction)?.narrowLiteral == lowerLimitConst }
+        val (limiterMaxConstIndex, limiterMaxConst) =
+            limiterMethodImpl.instructions.withIndex()
+                .first { (it.value as? NarrowLiteralInstruction)?.narrowLiteral == upperLimitConst }
 
         val limiterMinConstDestination = (limiterMinConst as OneRegisterInstruction).registerA
         val limiterMaxConstDestination = (limiterMaxConst as OneRegisterInstruction).registerA
@@ -137,15 +142,16 @@ object CustomPlaybackSpeedPatch : BytecodePatch(
         GetOldPlaybackSpeedsFingerprint.result?.let { result ->
             // Add a static INSTANCE field to the class.
             // This is later used to call "showOldPlaybackSpeedMenu" on the instance.
-            val instanceField = ImmutableField(
-                result.classDef.type,
-                "INSTANCE",
-                result.classDef.type,
-                AccessFlags.PUBLIC or AccessFlags.STATIC,
-                null,
-                null,
-                null
-            ).toMutable()
+            val instanceField =
+                ImmutableField(
+                    result.classDef.type,
+                    "INSTANCE",
+                    result.classDef.type,
+                    AccessFlags.PUBLIC or AccessFlags.STATIC,
+                    null,
+                    null,
+                    null
+                ).toMutable()
 
             result.mutableClass.staticFields.add(instanceField)
             // Set the INSTANCE field to the instance of the class.
@@ -154,10 +160,12 @@ object CustomPlaybackSpeedPatch : BytecodePatch(
 
             // Get the "showOldPlaybackSpeedMenu" method.
             // This is later called on the field INSTANCE.
-            val showOldPlaybackSpeedMenuMethod = ShowOldPlaybackSpeedMenuFingerprint.also {
-                if (!it.resolve(context, result.classDef))
-                    throw ShowOldPlaybackSpeedMenuFingerprint.exception
-            }.result!!.method.toString()
+            val showOldPlaybackSpeedMenuMethod =
+                ShowOldPlaybackSpeedMenuFingerprint.also {
+                    if (!it.resolve(context, result.classDef)) {
+                        throw ShowOldPlaybackSpeedMenuFingerprint.exception
+                    }
+                }.result!!.method.toString()
 
             // Insert the call to the "showOldPlaybackSpeedMenu" method on the field INSTANCE.
             ShowOldPlaybackSpeedMenuIntegrationsFingerprint.result?.mutableMethod?.apply {

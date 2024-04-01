@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.misc.settings.SettingsPatch
         SettingsPatch::class,
         ResourceMappingPatch::class,
         AddResourcesPatch::class
-    ],
+    ]
 )
 internal object AlbumCardsResourcePatch : ResourcePatch() {
     internal var albumCardId: Long = -1
@@ -25,8 +25,9 @@ internal object AlbumCardsResourcePatch : ResourcePatch() {
             SwitchPreference("revanced_hide_album_cards")
         )
 
-        albumCardId = ResourceMappingPatch.resourceMappings.single {
-            it.type == "layout" && it.name == "album_card"
-        }.id
+        albumCardId =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "layout" && it.name == "album_card"
+            }.id
     }
 }

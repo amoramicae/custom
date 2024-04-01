@@ -9,7 +9,8 @@ internal object LicenseValidationFingerprint : MethodFingerprint(
     returnType = "Z",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.STATIC,
     parameters = listOf("Landroid/content/Context;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_STATIC,
         Opcode.MOVE_RESULT_WIDE,
         Opcode.INVOKE_STATIC,

@@ -17,7 +17,7 @@ object UnlockProPatch : BytecodePatch(
     setOf(CheckProFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
-         val method = CheckProFingerprint.result!!.mutableMethod
+        val method = CheckProFingerprint.result!!.mutableMethod
         method.addInstructions(
             0,
             """

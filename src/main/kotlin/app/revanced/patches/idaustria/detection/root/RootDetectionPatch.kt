@@ -18,9 +18,10 @@ import app.revanced.util.returnEarly
 object RootDetectionPatch : BytecodePatch(
     setOf(AttestationSupportedCheckFingerprint, BootloaderCheckFingerprint, RootCheckFingerprint)
 ) {
-    override fun execute(context: BytecodeContext) = listOf(
-        AttestationSupportedCheckFingerprint,
-        BootloaderCheckFingerprint,
-        RootCheckFingerprint
-    ).returnEarly(true)
+    override fun execute(context: BytecodeContext) =
+        listOf(
+            AttestationSupportedCheckFingerprint,
+            BootloaderCheckFingerprint,
+            RootCheckFingerprint
+        ).returnEarly(true)
 }

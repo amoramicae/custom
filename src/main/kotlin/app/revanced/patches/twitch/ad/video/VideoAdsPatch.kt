@@ -39,35 +39,45 @@ object VideoAdsPatch : BaseAdPatch(
             SwitchPreference("revanced_block_video_ads")
         )
 
-        /* Amazon ads SDK */
+        // Amazon ads SDK
         context.blockMethods(
             "Lcom/amazon/ads/video/player/AdsManagerImpl;",
             "playAds"
         )
 
-        /* Twitch ads manager */
+        // Twitch ads manager
         context.blockMethods(
             "Ltv/twitch/android/shared/ads/VideoAdManager;",
-            "checkAdEligibilityAndRequestAd", "requestAd", "requestAds"
+            "checkAdEligibilityAndRequestAd",
+            "requestAd",
+            "requestAds"
         )
 
-        /* Various ad presenters */
+        // Various ad presenters
         context.blockMethods(
             "Ltv/twitch/android/shared/ads/AdsPlayerPresenter;",
-            "requestAd", "requestFirstAd", "requestFirstAdIfEligible", "requestMidroll", "requestAdFromMultiAdFormatEvent"
+            "requestAd",
+            "requestFirstAd",
+            "requestFirstAdIfEligible",
+            "requestMidroll",
+            "requestAdFromMultiAdFormatEvent"
         )
 
         context.blockMethods(
             "Ltv/twitch/android/shared/ads/AdsVodPlayerPresenter;",
-            "requestAd", "requestFirstAd",
+            "requestAd",
+            "requestFirstAd"
         )
 
         context.blockMethods(
             "Ltv/twitch/android/feature/theatre/ads/AdEdgeAllocationPresenter;",
-            "parseAdAndCheckEligibility", "requestAdsAfterEligibilityCheck", "showAd", "bindMultiAdFormatAllocation"
+            "parseAdAndCheckEligibility",
+            "requestAdsAfterEligibilityCheck",
+            "showAd",
+            "bindMultiAdFormatAllocation"
         )
 
-        /* A/B ad testing experiments */
+        // A/B ad testing experiments
         context.blockMethods(
             "Ltv/twitch/android/provider/experiments/helpers/DisplayAdsExperimentHelper;",
             "areDisplayAdsEnabled",
@@ -76,13 +86,15 @@ object VideoAdsPatch : BaseAdPatch(
 
         context.blockMethods(
             "Ltv/twitch/android/shared/ads/tracking/MultiFormatAdsTrackingExperiment;",
-            "shouldUseMultiAdFormatTracker", "shouldUseVideoAdTracker",
+            "shouldUseMultiAdFormatTracker",
+            "shouldUseVideoAdTracker",
             returnMethod = ReturnMethod('Z', "0")
         )
 
         context.blockMethods(
             "Ltv/twitch/android/shared/ads/MultiformatAdsExperiment;",
-            "shouldDisableClientSideLivePreroll", "shouldDisableClientSideVodPreroll",
+            "shouldDisableClientSideLivePreroll",
+            "shouldDisableClientSideVodPreroll",
             returnMethod = ReturnMethod('Z', "1")
         )
 
@@ -118,13 +130,15 @@ object VideoAdsPatch : BaseAdPatch(
 
         // Spoof showAds JSON field
         ContentConfigShowAdsFingerprint.result?.apply {
-            mutableMethod.addInstructions(0, """
+            mutableMethod.addInstructions(
+                0,
+                """
                     ${createConditionInstructions()}
                     const/4 v0, 0
                     :$skipLabelName
                     return v0
                 """
             )
-        }  ?: throw ContentConfigShowAdsFingerprint.exception
+        } ?: throw ContentConfigShowAdsFingerprint.exception
     }
 }

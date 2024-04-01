@@ -40,7 +40,7 @@ object RememberClearDisplayPatch : BytecodePatch(
             it.addInstructions(
                 isEnabledIndex,
                 "invoke-static { v$isEnabledRegister }, " +
-                        "Lapp/revanced/integrations/tiktok/cleardisplay/RememberClearDisplayPatch;->rememberClearDisplayState(Z)V"
+                    "Lapp/revanced/integrations/tiktok/cleardisplay/RememberClearDisplayPatch;->rememberClearDisplayState(Z)V"
             )
 
             // endregion

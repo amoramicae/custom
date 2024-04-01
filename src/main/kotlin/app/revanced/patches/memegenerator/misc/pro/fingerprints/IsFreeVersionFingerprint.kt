@@ -10,7 +10,8 @@ internal object IsFreeVersionFingerprint : MethodFingerprint(
     accessFlags = AccessFlags.PUBLIC or AccessFlags.STATIC,
     strings = listOf("free"),
     parameters = listOf("Landroid/content/Context;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.SGET,
         Opcode.INVOKE_VIRTUAL,
         Opcode.MOVE_RESULT_OBJECT,

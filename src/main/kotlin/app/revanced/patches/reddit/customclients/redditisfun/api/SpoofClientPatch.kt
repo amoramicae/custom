@@ -12,13 +12,13 @@ import app.revanced.patches.reddit.customclients.redditisfun.api.fingerprints.Bu
 import app.revanced.patches.reddit.customclients.redditisfun.api.fingerprints.GetUserAgentFingerprint
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-
 @Suppress("unused")
 object SpoofClientPatch : BaseSpoofClientPatch(
     redirectUri = "redditisfun://auth",
     clientIdFingerprints = setOf(BuildAuthorizationStringFingerprint, BasicAuthorizationFingerprint),
     userAgentFingerprints = setOf(GetUserAgentFingerprint),
-    compatiblePackages = setOf(
+    compatiblePackages =
+    setOf(
         CompatiblePackage("com.andrewshu.android.reddit"),
         CompatiblePackage("com.andrewshu.android.redditdonation")
     )
@@ -34,7 +34,7 @@ object SpoofClientPatch : BaseSpoofClientPatch(
          */
         fun MethodFingerprintResult.replaceWith(
             string: String,
-            getReplacementIndex: List<StringMatch>.() -> Int,
+            getReplacementIndex: List<StringMatch>.() -> Int
         ) = mutableMethod.apply {
             val replacementIndex = scanResult.stringsScanResult!!.matches.getReplacementIndex()
             val clientIdRegister = getInstruction<OneRegisterInstruction>(replacementIndex).registerA

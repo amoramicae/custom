@@ -6,7 +6,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.warnwetter.misc.firebasegetcert.fingerprints.GetMessagingCertFingerprint
-import app.revanced.patches.warnwetter.misc.firebasegetcert.fingerprints.GetReqistrationCertFingerprint
+import app.revanced.patches.warnwetter.misc.firebasegetcert.fingerprints.GetRegistrationCertFingerprint
 
 @Patch(
     description = "Spoofs the X-Android-Cert header.",
@@ -14,7 +14,7 @@ import app.revanced.patches.warnwetter.misc.firebasegetcert.fingerprints.GetReqi
 )
 object FirebaseGetCertPatch : BytecodePatch(
     setOf(
-        GetReqistrationCertFingerprint,
+        GetRegistrationCertFingerprint,
         GetMessagingCertFingerprint
     )
 ) {
@@ -25,7 +25,7 @@ object FirebaseGetCertPatch : BytecodePatch(
                 return-object v0
             """
 
-        val registrationCertMethod = GetReqistrationCertFingerprint.result!!.mutableMethod
+        val registrationCertMethod = GetRegistrationCertFingerprint.result!!.mutableMethod
         val messagingCertMethod = GetMessagingCertFingerprint.result!!.mutableMethod
 
         registrationCertMethod.addInstructions(

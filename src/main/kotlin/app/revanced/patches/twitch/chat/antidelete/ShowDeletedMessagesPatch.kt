@@ -23,7 +23,7 @@ import app.revanced.util.exception
     dependencies = [
         IntegrationsPatch::class,
         SettingsPatch::class,
-        AddResourcesPatch::class,
+        AddResourcesPatch::class
     ],
     compatiblePackages = [CompatiblePackage("tv.twitch.android.app", ["15.4.1", "16.1.0", "16.9.1"])]
 )
@@ -47,14 +47,15 @@ object ShowDeletedMessagesPatch : BytecodePatch(
         SettingsPatch.PreferenceScreen.CHAT.GENERAL.addPreferences(
             ListPreference(
                 key = "revanced_show_deleted_messages",
-                summaryKey = null,
+                summaryKey = null
             )
         )
 
-        // Spoiler mode: Force set hasModAccess member to true in constructor
+        // Spoiler mode: Force set hasModAccess member to true in constructor.
         DeletedMessageClickableSpanCtorFingerprint.result?.mutableMethod?.apply {
             addInstructionsWithLabels(
-                implementation!!.instructions.lastIndex, /* place in front of return-void */
+                // Right before return-void.
+                implementation!!.instructions.lastIndex,
                 """
                     ${createSpoilerConditionInstructions()}
                     const/4 v0, 1
@@ -64,11 +65,11 @@ object ShowDeletedMessagesPatch : BytecodePatch(
             )
         } ?: throw DeletedMessageClickableSpanCtorFingerprint.exception
 
-        // Spoiler mode: Disable setHasModAccess setter
+        // Spoiler mode: Disable setHasModAccess setter.
         SetHasModAccessFingerprint.result?.mutableMethod?.addInstruction(0, "return-void")
             ?: throw SetHasModAccessFingerprint.exception
 
-        // Cross-out mode: Reformat span of deleted message
+        // Cross-out mode: Reformat span of deleted message.
         ChatUtilCreateDeletedSpanFingerprint.result?.mutableMethod?.apply {
             addInstructionsWithLabels(
                 0,

@@ -14,11 +14,12 @@ abstract class BaseSpoofClientPatch(
     private val clientIdFingerprints: Set<MethodFingerprint> = emptySet(),
     private val userAgentFingerprints: Set<MethodFingerprint> = emptySet(),
     compatiblePackages: Set<CompatiblePackage>,
-    dependencies: Set<PatchClass> = emptySet(),
+    dependencies: Set<PatchClass> = emptySet()
 ) : BytecodePatch(
     name = "Spoof client",
     description = "Restores functionality of the app by using custom client ID.",
-    fingerprints = buildSet {
+    fingerprints =
+    buildSet {
         addAll(clientIdFingerprints)
         userAgentFingerprints.let(::addAll)
         miscellaneousFingerprints.let(::addAll)
@@ -32,9 +33,9 @@ abstract class BaseSpoofClientPatch(
         null,
         "OAuth client ID",
         "The Reddit OAuth client ID. " +
-                "You can get your client ID from https://www.reddit.com/prefs/apps. " +
-                "The application type has to be \"Installed app\" " +
-                "and the redirect URI has to be set to \"$redirectUri\".",
+            "You can get your client ID from https://www.reddit.com/prefs/apps. " +
+            "The application type has to be \"Installed app\" " +
+            "and the redirect URI has to be set to \"$redirectUri\".",
         true
     )
 

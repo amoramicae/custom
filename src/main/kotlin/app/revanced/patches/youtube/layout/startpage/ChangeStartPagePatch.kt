@@ -36,7 +36,7 @@ object ChangeStartPagePatch : BytecodePatch(
         SettingsPatch.PreferenceScreen.GENERAL_LAYOUT.addPreferences(
             ListPreference(
                 key = "revanced_start_page",
-                summaryKey = null,
+                summaryKey = null
             )
         )
 

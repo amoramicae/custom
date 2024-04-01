@@ -12,7 +12,8 @@ internal object StoryboardRendererDecoderRecommendedLevelFingerprint : MethodFin
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("Lcom/google/android/libraries/youtube/innertube/model/player/PlayerResponseModel;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_INTERFACE,
         Opcode.MOVE_RESULT_OBJECT,
         Opcode.IPUT_OBJECT,

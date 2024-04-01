@@ -2,9 +2,10 @@ package app.revanced.patches.warnwetter.misc.firebasegetcert.fingerprints
 
 import app.revanced.patcher.fingerprint.MethodFingerprint
 
-internal object GetReqistrationCertFingerprint : MethodFingerprint(
+internal object GetRegistrationCertFingerprint : MethodFingerprint(
     "Ljava/lang/String;",
-    strings = listOf(
+    strings =
+    listOf(
         "FirebaseRemoteConfig",
         "Could not get fingerprint hash for package: ",
         "No such package: "

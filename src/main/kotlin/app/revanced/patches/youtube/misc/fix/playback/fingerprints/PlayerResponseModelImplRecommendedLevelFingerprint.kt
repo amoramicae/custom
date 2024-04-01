@@ -1,8 +1,8 @@
 package app.revanced.patches.youtube.misc.fix.playback.fingerprints
 
-import app.revanced.util.containsWideLiteralInstructionValue
 import app.revanced.patcher.extensions.or
 import app.revanced.patcher.fingerprint.MethodFingerprint
+import app.revanced.util.containsWideLiteralInstructionValue
 import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
@@ -10,7 +10,8 @@ internal object PlayerResponseModelImplRecommendedLevelFingerprint : MethodFinge
     returnType = "I",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = emptyList(),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.SGET_OBJECT,
         Opcode.IGET,
         Opcode.RETURN

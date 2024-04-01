@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.misc.settings.SettingsPatch
         SettingsPatch::class,
         ResourceMappingPatch::class,
         AddResourcesPatch::class
-    ],
+    ]
 )
 internal object BreakingNewsResourcePatch : ResourcePatch() {
     internal var horizontalCardListId: Long = -1
@@ -25,8 +25,9 @@ internal object BreakingNewsResourcePatch : ResourcePatch() {
             SwitchPreference("revanced_hide_breaking_news")
         )
 
-        horizontalCardListId = ResourceMappingPatch.resourceMappings.single {
-            it.type == "layout" && it.name == "horizontal_card_list"
-        }.id
+        horizontalCardListId =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "layout" && it.name == "horizontal_card_list"
+            }.id
     }
 }

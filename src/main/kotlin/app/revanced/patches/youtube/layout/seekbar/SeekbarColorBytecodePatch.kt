@@ -1,7 +1,5 @@
 package app.revanced.patches.youtube.layout.seekbar
 
-import app.revanced.util.exception
-import app.revanced.util.indexOfFirstWideLiteralInstructionValue
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -15,6 +13,8 @@ import app.revanced.patches.youtube.layout.seekbar.fingerprints.ShortsSeekbarCol
 import app.revanced.patches.youtube.layout.theme.LithoColorHookPatch
 import app.revanced.patches.youtube.layout.theme.LithoColorHookPatch.lithoColorOverrideHook
 import app.revanced.patches.youtube.misc.integrations.IntegrationsPatch
+import app.revanced.util.exception
+import app.revanced.util.indexOfFirstWideLiteralInstructionValue
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
@@ -53,10 +53,11 @@ internal object SeekbarColorBytecodePatch : BytecodePatch(
         SetSeekbarClickedColorFingerprint.result?.let { result ->
             result.mutableMethod.let {
                 val setColorMethodIndex = result.scanResult.patternScanResult!!.startIndex + 1
-                val method = context
-                    .toMethodWalker(it)
-                    .nextMethod(setColorMethodIndex, true)
-                    .getMethod() as MutableMethod
+                val method =
+                    context
+                        .toMethodWalker(it)
+                        .nextMethod(setColorMethodIndex, true)
+                        .getMethod() as MutableMethod
 
                 method.apply {
                     val colorRegister = getInstruction<TwoRegisterInstruction>(0).registerA

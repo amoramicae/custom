@@ -6,7 +6,8 @@ import com.android.tools.smali.dexlib2.AccessFlags
 
 internal object LoadInboxAdsFingerprint : MethodFingerprint(
     returnType = "V",
-    strings = listOf(
+    strings =
+    listOf(
         "ads_load_begin",
         "inbox_ads_fetch_start"
     ),
@@ -15,4 +16,3 @@ internal object LoadInboxAdsFingerprint : MethodFingerprint(
         methodDef.definingClass == "Lcom/facebook/messaging/business/inboxads/plugins/inboxads/itemsupplier/InboxAdsItemSupplierImplementation;"
     }
 )
-

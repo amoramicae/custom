@@ -1,6 +1,5 @@
 package app.revanced.patches.facebook.ads.story
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.revanced.patcher.patch.BytecodePatch
@@ -8,6 +7,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.facebook.ads.story.fingerprints.AdsInsertionFingerprint
 import app.revanced.patches.facebook.ads.story.fingerprints.FetchMoreAdsFingerprint
+import app.revanced.util.exception
 
 @Patch(
     name = "Hide story ads",

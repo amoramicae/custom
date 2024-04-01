@@ -17,11 +17,11 @@ import app.revanced.patches.youtube.misc.settings.SettingsPatch
     dependencies = [
         IntegrationsPatch::class,
         SettingsPatch::class,
-        AddResourcesPatch::class,
+        AddResourcesPatch::class
     ],
     compatiblePackages = [
-        CompatiblePackage("com.google.android.youtube"),
-    ],
+        CompatiblePackage("com.google.android.youtube")
+    ]
 )
 object HideCastButtonPatch : BytecodePatch(emptySet()) {
     override fun execute(context: BytecodeContext) {
@@ -31,8 +31,9 @@ object HideCastButtonPatch : BytecodePatch(emptySet()) {
             SwitchPreference("revanced_hide_cast_button")
         )
 
-        val buttonClass = context.findClass("MediaRouteButton")
-            ?: throw PatchException("MediaRouteButton class not found.")
+        val buttonClass =
+            context.findClass("MediaRouteButton")
+                ?: throw PatchException("MediaRouteButton class not found.")
 
         buttonClass.mutableClass.methods.find { it.name == "setVisibility" }?.apply {
             addInstructions(
@@ -40,7 +41,7 @@ object HideCastButtonPatch : BytecodePatch(emptySet()) {
                 """
                     invoke-static {p1}, Lapp/revanced/integrations/youtube/patches/HideCastButtonPatch;->getCastButtonOverrideV2(I)I
                     move-result p1
-                """,
+                """
             )
         } ?: throw PatchException("setVisibility method not found.")
     }

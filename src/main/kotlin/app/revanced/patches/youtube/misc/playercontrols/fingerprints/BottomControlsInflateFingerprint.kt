@@ -10,7 +10,8 @@ internal object BottomControlsInflateFingerprint : LiteralValueFingerprint(
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL or AccessFlags.SYNTHETIC,
     returnType = "L",
     parameters = listOf(),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CHECK_CAST,
         Opcode.INVOKE_VIRTUAL,
         Opcode.MOVE_RESULT_OBJECT

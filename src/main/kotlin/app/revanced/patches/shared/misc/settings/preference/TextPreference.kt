@@ -20,8 +20,10 @@ class TextPreference(
     tag: String = "app.revanced.integrations.shared.settings.preference.ResettableEditTextPreference",
     val inputType: InputType = InputType.TEXT
 ) : BasePreference(key, titleKey, summaryKey, tag) {
-
-    override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
+    override fun serialize(
+        ownerDocument: Document,
+        resourceCallback: (BaseResource) -> Unit
+    ) =
         super.serialize(ownerDocument, resourceCallback).apply {
             setAttribute("android:inputType", inputType.type)
         }

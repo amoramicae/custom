@@ -9,7 +9,8 @@ internal object HTTPUriParserFingerprint : MethodFingerprint(
     returnType = "Landroid/net/Uri",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.STATIC,
     parameters = listOf("Ljava/lang/String"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_STATIC,
         Opcode.MOVE_RESULT_OBJECT
     ),

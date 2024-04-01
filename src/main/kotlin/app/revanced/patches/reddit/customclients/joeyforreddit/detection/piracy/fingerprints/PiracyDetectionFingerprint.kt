@@ -8,12 +8,13 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object PiracyDetectionFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PRIVATE or AccessFlags.STATIC,
-    opcodes = listOf(
-        Opcode.NEW_INSTANCE,    // new PiracyDetectionRunnable()
+    opcodes =
+    listOf(
+        Opcode.NEW_INSTANCE, // new PiracyDetectionRunnable()
         Opcode.CONST_16,
         Opcode.CONST_WIDE_16,
-        Opcode.INVOKE_DIRECT,   // <init>(..)
-        Opcode.INVOKE_VIRTUAL,  // run()
+        Opcode.INVOKE_DIRECT, // <init>(..)
+        Opcode.INVOKE_VIRTUAL, // run()
         Opcode.RETURN_VOID
     ),
     customFingerprint = custom@{ _, classDef ->

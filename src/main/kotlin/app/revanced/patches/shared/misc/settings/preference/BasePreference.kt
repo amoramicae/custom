@@ -28,10 +28,13 @@ abstract class BasePreference(
      *
      * @return The serialized element.
      */
-    open fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit): Element =
+    open fun serialize(
+        ownerDocument: Document,
+        resourceCallback: (BaseResource) -> Unit
+    ): Element =
         ownerDocument.createElement(tag).apply {
             key?.let { setAttribute("android:key", it) }
-            setAttribute("android:title", "@string/${titleKey}")
+            setAttribute("android:title", "@string/$titleKey")
             summaryKey?.let { addSummary(it) }
         }
 
@@ -56,7 +59,10 @@ abstract class BasePreference(
     }
 
     companion object {
-        fun Element.addSummary(summaryKey: String, summaryType: SummaryType = SummaryType.DEFAULT) =
+        fun Element.addSummary(
+            summaryKey: String,
+            summaryType: SummaryType = SummaryType.DEFAULT
+        ) =
             setAttribute("android:${summaryType.type}", "@string/$summaryKey")
     }
 }

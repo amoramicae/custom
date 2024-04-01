@@ -7,10 +7,11 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 
 internal object CreateEndScreenViewFingerprint : LiteralValueFingerprint(
-    returnType= "Landroid/view/View;",
+    returnType = "Landroid/view/View;",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("Landroid/content/Context;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_DIRECT,
         Opcode.INVOKE_VIRTUAL,
         Opcode.CONST

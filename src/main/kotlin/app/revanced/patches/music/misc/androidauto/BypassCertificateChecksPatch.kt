@@ -1,13 +1,12 @@
 package app.revanced.patches.music.misc.androidauto
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.music.misc.androidauto.fingerprints.CheckCertificateFingerprint
-
+import app.revanced.util.exception
 
 @Patch(
     name = "Bypass certificate checks",
@@ -19,7 +18,8 @@ object BypassCertificateChecksPatch : BytecodePatch(setOf(CheckCertificateFinger
     override fun execute(context: BytecodeContext) {
         CheckCertificateFingerprint.result?.apply {
             mutableMethod.addInstructions(
-                0, """
+                0,
+                """
                 const/4 v0, 0x1
                 return v0
                 """

@@ -12,21 +12,23 @@ import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction10t
 import com.android.tools.smali.dexlib2.builder.instruction.BuilderInstruction21t
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
-
 @Suppress("unused")
 object SpoofClientPatch : BaseSpoofClientPatch(
     redirectUri = "dbrady://relay",
-    miscellaneousFingerprints = setOf(
+    miscellaneousFingerprints =
+    setOf(
         SetRemoteConfigFingerprint,
         RedditCheckDisableAPIFingerprint
     ),
-    clientIdFingerprints = setOf(
+    clientIdFingerprints =
+    setOf(
         LoginActivityClientIdFingerprint,
         GetLoggedInBearerTokenFingerprint,
         GetLoggedOutBearerTokenFingerprint,
         GetRefreshTokenFingerprint
     ),
-    compatiblePackages = setOf(
+    compatiblePackages =
+    setOf(
         CompatiblePackage("free.reddit.news"),
         CompatiblePackage("reddit.news")
     )

@@ -9,7 +9,8 @@ internal object ABUriParserFingerprint : MethodFingerprint(
     returnType = "Ljava/lang/Object",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("Ljava/lang/Object"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.RETURN_OBJECT,
         Opcode.CHECK_CAST,
         Opcode.INVOKE_VIRTUAL,

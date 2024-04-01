@@ -9,9 +9,10 @@ internal object RollingNumberTextViewFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L", "F", "F"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.IPUT,
-        null,   // invoke-direct or invoke-virtual
+        null, // invoke-direct or invoke-virtual
         Opcode.IPUT_OBJECT,
         Opcode.IGET_OBJECT,
         Opcode.INVOKE_VIRTUAL,

@@ -7,7 +7,6 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.irplus.ad.fingerprints.IrplusAdsFingerprint
 
-
 @Patch(
     name = "Remove ads",
     compatiblePackages = [CompatiblePackage("net.binarymode.android.irplus")]

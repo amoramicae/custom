@@ -14,9 +14,9 @@ import app.revanced.patches.moneymanager.fingerprints.UnlockProFingerprint
 @Suppress("unused")
 object UnlockProPatch : BytecodePatch(
     setOf(UnlockProFingerprint)
-){
+) {
     override fun execute(context: BytecodeContext) {
-       UnlockProFingerprint.result!!.mutableMethod.addInstructions(
+        UnlockProFingerprint.result!!.mutableMethod.addInstructions(
             0,
             """
                const/4 v0, 0x1

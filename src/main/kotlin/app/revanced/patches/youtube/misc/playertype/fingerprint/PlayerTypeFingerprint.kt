@@ -9,7 +9,8 @@ internal object PlayerTypeFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.IF_NE,
         Opcode.RETURN_VOID
     ),

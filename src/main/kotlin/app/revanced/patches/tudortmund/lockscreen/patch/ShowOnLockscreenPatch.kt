@@ -1,6 +1,5 @@
 package app.revanced.patches.tudortmund.lockscreen.patch
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -9,6 +8,7 @@ import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.tudortmund.lockscreen.fingerprints.BrightnessFingerprint
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction22c
 import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction35c
@@ -30,32 +30,36 @@ object ShowOnLockscreenPatch : BytecodePatch(
     override fun execute(context: BytecodeContext) {
         BrightnessFingerprint.result?.mutableMethod?.apply {
             // Find the instruction where the brightness value is loaded into a register
-            val brightnessInstruction = implementation!!.instructions.firstNotNullOf { instruction ->
-                if (instruction.opcode != Opcode.IGET_OBJECT) return@firstNotNullOf null
+            val brightnessInstruction =
+                implementation!!.instructions.firstNotNullOf { instruction ->
+                    if (instruction.opcode != Opcode.IGET_OBJECT) return@firstNotNullOf null
 
-                val getInstruction = instruction as Instruction22c
-                val fieldReference = getInstruction.reference as FieldReference
+                    val getInstruction = instruction as Instruction22c
+                    val fieldReference = getInstruction.reference as FieldReference
 
-                if (fieldReference.type != "Ljava/lang/Float;") return@firstNotNullOf null
+                    if (fieldReference.type != "Ljava/lang/Float;") return@firstNotNullOf null
 
-                instruction
-            }
+                    instruction
+                }
 
             // Search for the instruction where we get the android.view.Window via the Activity.
             // Gets the index of that instruction and the register of the Activity.
-            val (windowIndex, activityRegister) = implementation!!.instructions.withIndex()
-                .firstNotNullOf { (index, instruction) ->
-                    if (instruction.opcode != Opcode.INVOKE_VIRTUAL)
-                        return@firstNotNullOf null
+            val (windowIndex, activityRegister) =
+                implementation!!.instructions.withIndex()
+                    .firstNotNullOf { (index, instruction) ->
+                        if (instruction.opcode != Opcode.INVOKE_VIRTUAL) {
+                            return@firstNotNullOf null
+                        }
 
-                    val invokeInstruction = instruction as Instruction35c
-                    val methodRef = invokeInstruction.reference as MethodReference
+                        val invokeInstruction = instruction as Instruction35c
+                        val methodRef = invokeInstruction.reference as MethodReference
 
-                    if (methodRef.name != "getWindow" || methodRef.returnType != "Landroid/view/Window;")
-                        return@firstNotNullOf null
+                        if (methodRef.name != "getWindow" || methodRef.returnType != "Landroid/view/Window;") {
+                            return@firstNotNullOf null
+                        }
 
-                    Pair(index, invokeInstruction.registerC)
-                }
+                        Pair(index, invokeInstruction.registerC)
+                    }
 
             // The register in which the brightness value is loaded
             val brightnessRegister = brightnessInstruction.registerA
@@ -64,10 +68,10 @@ object ShowOnLockscreenPatch : BytecodePatch(
             replaceInstruction(
                 windowIndex,
                 "invoke-static { v$activityRegister, v$brightnessRegister }, " +
-                        "$INTEGRATIONS_CLASS_DESCRIPTOR->" +
-                        "getWindow" +
-                        "(Landroidx/appcompat/app/AppCompatActivity;F)" +
-                        "Landroid/view/Window;"
+                    "$INTEGRATIONS_CLASS_DESCRIPTOR->" +
+                    "getWindow" +
+                    "(Landroidx/appcompat/app/AppCompatActivity;F)" +
+                    "Landroid/view/Window;"
             )
 
             // Normally, the brightness is loaded into a register after the getWindow call.
@@ -83,7 +87,6 @@ object ShowOnLockscreenPatch : BytecodePatch(
             )
 
             addInstruction(windowIndex, brightnessInstruction)
-
         } ?: throw BrightnessFingerprint.exception
     }
 }

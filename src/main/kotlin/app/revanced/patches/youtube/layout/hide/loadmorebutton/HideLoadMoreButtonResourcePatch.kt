@@ -25,8 +25,9 @@ internal object HideLoadMoreButtonResourcePatch : ResourcePatch() {
             SwitchPreference("revanced_hide_load_more_button")
         )
 
-        expandButtonDownId = ResourceMappingPatch.resourceMappings.single {
-            it.type == "layout" && it.name == "expand_button_down"
-        }.id
+        expandButtonDownId =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "layout" && it.name == "expand_button_down"
+            }.id
     }
 }

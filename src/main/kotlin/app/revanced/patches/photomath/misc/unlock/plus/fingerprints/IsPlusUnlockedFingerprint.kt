@@ -7,10 +7,12 @@ import com.android.tools.smali.dexlib2.AccessFlags
 internal object IsPlusUnlockedFingerprint : MethodFingerprint(
     returnType = "Z",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
-    strings = listOf(
+    strings =
+    listOf(
         "genius"
     ),
     customFingerprint = {
-        methodDef, _ -> methodDef.definingClass.endsWith("/User;")
+            methodDef, _ ->
+        methodDef.definingClass.endsWith("/User;")
     }
 )

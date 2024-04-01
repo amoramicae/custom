@@ -8,7 +8,8 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object RecyclerViewTreeObserverFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.CONSTRUCTOR,
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.NEW_INSTANCE,
         Opcode.INVOKE_DIRECT,
         Opcode.INVOKE_VIRTUAL,

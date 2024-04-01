@@ -10,7 +10,8 @@ internal object RootDetectionFingerprint : MethodFingerprint(
     "L",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.STATIC,
     parameters = listOf("L"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.NEW_INSTANCE,
         Opcode.INVOKE_DIRECT,
         Opcode.INVOKE_VIRTUAL,

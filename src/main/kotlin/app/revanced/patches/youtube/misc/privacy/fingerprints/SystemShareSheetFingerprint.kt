@@ -6,7 +6,8 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object SystemShareSheetFingerprint : MethodFingerprint(
     returnType = "V",
     parameters = listOf("L", "Ljava/util/Map;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CHECK_CAST,
         Opcode.GOTO
     ),

@@ -14,13 +14,12 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.immutable.reference.ImmutableMethodReference
 import com.android.tools.smali.dexlib2.util.MethodUtil
-import java.util.*
-
+import java.util.Locale
 
 @Patch(
     name = "Spoof SIM country",
     description = "Spoofs country information returned by the SIM card provider.",
-    use = false,
+    use = false
 )
 @Suppress("unused")
 object SpoofSimCountryPatch : BaseTransformInstructionsPatch<Pair<Int, String>>() {
@@ -28,17 +27,17 @@ object SpoofSimCountryPatch : BaseTransformInstructionsPatch<Pair<Int, String>>(
 
     private val networkCountryIso by isoCountryPatchOption(
         "networkCountryIso",
-        "Network ISO Country Code",
+        "Network ISO Country Code"
     )
 
     private val simCountryIso by isoCountryPatchOption(
         "simCountryIso",
-        "Sim ISO Country Code",
+        "Sim ISO Country Code"
     )
 
     private fun isoCountryPatchOption(
         key: String,
-        title: String,
+        title: String
     ) = stringPatchOption(
         key,
         null,
@@ -59,14 +58,16 @@ object SpoofSimCountryPatch : BaseTransformInstructionsPatch<Pair<Int, String>>(
 
         val reference = instruction.reference as? MethodReference ?: return null
 
-        val match = MethodCall.entries.firstOrNull { search ->
-            MethodUtil.methodSignaturesMatch(reference, search.reference)
-        } ?: return null
+        val match =
+            MethodCall.entries.firstOrNull { search ->
+                MethodUtil.methodSignaturesMatch(reference, search.reference)
+            } ?: return null
 
-        val iso = when (match) {
-            MethodCall.NetworkCountryIso -> networkCountryIso
-            MethodCall.SimCountryIso -> simCountryIso
-        }?.lowercase()
+        val iso =
+            when (match) {
+                MethodCall.NetworkCountryIso -> networkCountryIso
+                MethodCall.SimCountryIso -> simCountryIso
+            }?.lowercase()
 
         return iso?.let { instructionIndex to it }
     }
@@ -95,18 +96,18 @@ object SpoofSimCountryPatch : BaseTransformInstructionsPatch<Pair<Int, String>>(
     ) {
         NetworkCountryIso(
             ImmutableMethodReference(
-            "Landroid/telephony/TelephonyManager;",
-            "getNetworkCountryIso",
-            emptyList(),
-            "Ljava/lang/String;"
+                "Landroid/telephony/TelephonyManager;",
+                "getNetworkCountryIso",
+                emptyList(),
+                "Ljava/lang/String;"
             )
         ),
         SimCountryIso(
             ImmutableMethodReference(
-            "Landroid/telephony/TelephonyManager;",
-            "getSimCountryIso",
-            emptyList(),
-            "Ljava/lang/String;"
+                "Landroid/telephony/TelephonyManager;",
+                "getSimCountryIso",
+                emptyList(),
+                "Ljava/lang/String;"
             )
         )
     }

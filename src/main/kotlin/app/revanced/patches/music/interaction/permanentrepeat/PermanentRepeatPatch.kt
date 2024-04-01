@@ -1,6 +1,5 @@
 package app.revanced.patches.music.interaction.permanentrepeat
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.revanced.patcher.extensions.InstructionExtensions.getInstruction
@@ -9,6 +8,7 @@ import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.smali.ExternalLabel
 import app.revanced.patches.music.interaction.permanentrepeat.fingerprints.RepeatTrackFingerprint
+import app.revanced.util.exception
 
 @Patch(
     name = "Permanent repeat",

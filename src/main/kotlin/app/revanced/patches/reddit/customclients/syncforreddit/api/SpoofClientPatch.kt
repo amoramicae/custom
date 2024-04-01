@@ -15,8 +15,7 @@ import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
-import java.util.*
-
+import java.util.Base64
 
 @Suppress("unused")
 object SpoofClientPatch : BaseSpoofClientPatch(
@@ -24,7 +23,8 @@ object SpoofClientPatch : BaseSpoofClientPatch(
     miscellaneousFingerprints = setOf(ImgurImageAPIFingerprint),
     clientIdFingerprints = setOf(GetAuthorizationStringFingerprint),
     userAgentFingerprints = setOf(LoadBrowserURLFingerprint),
-    compatiblePackages = setOf(
+    compatiblePackages =
+    setOf(
         CompatiblePackage("com.laurencedawson.reddit_sync"),
         CompatiblePackage("com.laurencedawson.reddit_sync.pro"),
         CompatiblePackage("com.laurencedawson.reddit_sync.dev")
@@ -52,10 +52,11 @@ object SpoofClientPatch : BaseSpoofClientPatch(
                     val targetRegister = (authorizationStringInstruction as OneRegisterInstruction).registerA
                     val reference = authorizationStringInstruction.reference as StringReference
 
-                    val newAuthorizationUrl = reference.string.replace(
-                        "client_id=.*?&".toRegex(),
-                        "client_id=$clientId&"
-                    )
+                    val newAuthorizationUrl =
+                        reference.string.replace(
+                            "client_id=.*?&".toRegex(),
+                            "client_id=$clientId&"
+                        )
 
                     replaceInstruction(
                         occurrenceIndex,
@@ -67,12 +68,13 @@ object SpoofClientPatch : BaseSpoofClientPatch(
     }
 
     // Use the non-commercial Imgur API endpoint.
-    override fun Set<MethodFingerprintResult>.patchMiscellaneous(context: BytecodeContext) = first().let {
-        val apiUrlIndex = it.scanResult.stringsScanResult!!.matches.first().index
+    override fun Set<MethodFingerprintResult>.patchMiscellaneous(context: BytecodeContext) =
+        first().let {
+            val apiUrlIndex = it.scanResult.stringsScanResult!!.matches.first().index
 
-        it.mutableMethod.replaceInstruction(
-            apiUrlIndex,
-            "const-string v1, \"https://api.imgur.com/3/image\""
-        )
-    }
+            it.mutableMethod.replaceInstruction(
+                apiUrlIndex,
+                "const-string v1, \"https://api.imgur.com/3/image\""
+            )
+        }
 }

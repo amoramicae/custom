@@ -19,8 +19,9 @@ import app.revanced.util.exception
 object HideUpdatePopupPatch : BytecodePatch(
     setOf(HideUpdatePopupFingerprint)
 ) {
-    override fun execute(context: BytecodeContext) = HideUpdatePopupFingerprint.result?.mutableMethod?.addInstructions(
-        2, // Insert after the null check.
-        "return-void"
-    ) ?: throw HideUpdatePopupFingerprint.exception
+    override fun execute(context: BytecodeContext) =
+        HideUpdatePopupFingerprint.result?.mutableMethod?.addInstructions(
+            2, // Insert after the null check.
+            "return-void"
+        ) ?: throw HideUpdatePopupFingerprint.exception
 }

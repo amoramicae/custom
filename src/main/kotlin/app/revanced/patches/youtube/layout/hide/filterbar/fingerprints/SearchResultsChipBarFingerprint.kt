@@ -9,7 +9,8 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object SearchResultsChipBarFingerprint : LiteralValueFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.CONSTRUCTOR,
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CONST,
         Opcode.INVOKE_VIRTUAL,
         Opcode.MOVE_RESULT,

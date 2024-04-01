@@ -1,19 +1,19 @@
 package app.revanced.patches.youtube.misc.playercontrols
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.fingerprint.MethodFingerprintResult
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.Patch
-import app.revanced.patches.youtube.shared.fingerprints.LayoutConstructorFingerprint
 import app.revanced.patches.youtube.misc.playercontrols.fingerprints.BottomControlsInflateFingerprint
 import app.revanced.patches.youtube.misc.playercontrols.fingerprints.PlayerControlsVisibilityFingerprint
+import app.revanced.patches.youtube.shared.fingerprints.LayoutConstructorFingerprint
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 @Patch(
     description = "Manages the code for the player controls of the YouTube player.",
-    dependencies = [BottomControlsResourcePatch::class],
+    dependencies = [BottomControlsResourcePatch::class]
 )
 object PlayerControlsBytecodePatch : BytecodePatch(
     setOf(LayoutConstructorFingerprint, BottomControlsInflateFingerprint)
@@ -26,17 +26,19 @@ object PlayerControlsBytecodePatch : BytecodePatch(
 
     override fun execute(context: BytecodeContext) {
         LayoutConstructorFingerprint.result?.let {
-            if (!PlayerControlsVisibilityFingerprint.resolve(context, it.classDef))
+            if (!PlayerControlsVisibilityFingerprint.resolve(context, it.classDef)) {
                 throw LayoutConstructorFingerprint.exception
+            }
         } ?: throw LayoutConstructorFingerprint.exception
 
         showPlayerControlsFingerprintResult = PlayerControlsVisibilityFingerprint.result!!
 
-        inflateFingerprintResult = BottomControlsInflateFingerprint.result!!.also {
-            moveToRegisterInstructionIndex = it.scanResult.patternScanResult!!.endIndex
-            viewRegister =
-                (it.mutableMethod.implementation!!.instructions[moveToRegisterInstructionIndex] as OneRegisterInstruction).registerA
-        }
+        inflateFingerprintResult =
+            BottomControlsInflateFingerprint.result!!.also {
+                moveToRegisterInstructionIndex = it.scanResult.patternScanResult!!.endIndex
+                viewRegister =
+                    (it.mutableMethod.implementation!!.instructions[moveToRegisterInstructionIndex] as OneRegisterInstruction).registerA
+            }
     }
 
     /**

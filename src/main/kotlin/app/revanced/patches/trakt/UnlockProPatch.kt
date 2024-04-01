@@ -1,6 +1,5 @@
 package app.revanced.patches.trakt
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -9,6 +8,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.trakt.fingerprints.IsVIPEPFingerprint
 import app.revanced.patches.trakt.fingerprints.IsVIPFingerprint
 import app.revanced.patches.trakt.fingerprints.RemoteUserFingerprint
+import app.revanced.util.exception
 
 @Patch(
     name = "Unlock pro",
@@ -30,8 +30,9 @@ object UnlockProPatch : BytecodePatch(
         RemoteUserFingerprint.result?.classDef?.let { remoteUserClass ->
             arrayOf(IsVIPFingerprint, IsVIPEPFingerprint).onEach { fingerprint ->
                 // Resolve both fingerprints on the same class.
-                if (!fingerprint.resolve(context, remoteUserClass))
+                if (!fingerprint.resolve(context, remoteUserClass)) {
                     throw fingerprint.exception
+                }
             }.forEach { fingerprint ->
                 // Return true for both VIP check methods.
                 fingerprint.result?.mutableMethod?.addInstructions(0, RETURN_TRUE_INSTRUCTIONS)

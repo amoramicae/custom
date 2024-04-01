@@ -48,7 +48,8 @@ object RememberPlaybackSpeedPatch : BytecodePatch(
 
         VideoInformationPatch.onCreateHook(INTEGRATIONS_CLASS_DESCRIPTOR, "newVideoStarted")
         VideoInformationPatch.userSelectedPlaybackSpeedHook(
-            INTEGRATIONS_CLASS_DESCRIPTOR, "userSelectedPlaybackSpeed"
+            INTEGRATIONS_CLASS_DESCRIPTOR,
+            "userSelectedPlaybackSpeed"
         )
 
         /*
@@ -63,25 +64,25 @@ object RememberPlaybackSpeedPatch : BytecodePatch(
             mutableMethod.addInstructionsWithLabels(
                 0,
                 """
-                    invoke-static { }, $INTEGRATIONS_CLASS_DESCRIPTOR->getPlaybackSpeedOverride()F
-                    move-result v0
-                    
-                    # Check if the playback speed is not 1.0x.
-                    const/high16 v1, 0x3f800000  # 1.0f
-                    cmpg-float v1, v0, v1
-                    if-eqz v1, :do_not_override
-    
-                    # Get the instance of the class which has the container class field below.
-                    iget-object v1, p0, $onItemClickListenerClassFieldReference
+                invoke-static { }, $INTEGRATIONS_CLASS_DESCRIPTOR->getPlaybackSpeedOverride()F
+                move-result v0
+                
+                # Check if the playback speed is not 1.0x.
+                const/high16 v1, 0x3f800000  # 1.0f
+                cmpg-float v1, v0, v1
+                if-eqz v1, :do_not_override
+                
+                # Get the instance of the class which has the container class field below.
+                iget-object v1, p0, $onItemClickListenerClassFieldReference
 
-                    # Get the container class field.
-                    iget-object v1, v1, ${VideoInformationPatch.setPlaybackSpeedContainerClassFieldReference}  
-                    
-                    # Get the field from its class.
-                    iget-object v2, v1, ${VideoInformationPatch.setPlaybackSpeedClassFieldReference}
-                    
-                    # Invoke setPlaybackSpeed on that class.
-                    invoke-virtual {v2, v0}, ${VideoInformationPatch.setPlaybackSpeedMethodReference}
+                # Get the container class field.
+                iget-object v1, v1, ${VideoInformationPatch.setPlaybackSpeedContainerClassFieldReference}  
+                
+                # Get the field from its class.
+                iget-object v2, v1, ${VideoInformationPatch.setPlaybackSpeedClassFieldReference}
+                
+                # Invoke setPlaybackSpeed on that class.
+                invoke-virtual {v2, v0}, ${VideoInformationPatch.setPlaybackSpeedMethodReference}
                 """.trimIndent(),
                 ExternalLabel("do_not_override", mutableMethod.getInstruction(0))
             )

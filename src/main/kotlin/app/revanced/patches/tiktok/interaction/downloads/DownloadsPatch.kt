@@ -82,19 +82,23 @@ object DownloadsPatch : BytecodePatch(
             // Change the download path patch.
             DownloadPathParentFingerprint to {
                 val targetIndex = indexOfFirstInstruction { opcode == Opcode.INVOKE_STATIC }
-                val downloadUriMethod = context
-                    .toMethodWalker(this)
-                    .nextMethod(targetIndex, true)
-                    .getMethod() as MutableMethod
+                val downloadUriMethod =
+                    context
+                        .toMethodWalker(this)
+                        .nextMethod(targetIndex, true)
+                        .getMethod() as MutableMethod
 
-                val firstIndex = downloadUriMethod.indexOfFirstInstruction {
-                    opcode == Opcode.INVOKE_DIRECT && ((this as Instruction35c).reference as MethodReference).name == "<init>"
-                }
-                val secondIndex = downloadUriMethod.indexOfFirstInstruction {
-                    opcode == Opcode.INVOKE_STATIC && ((this as Instruction35c).reference as MethodReference).returnType.contains(
-                        "Uri"
-                    )
-                }
+                val firstIndex =
+                    downloadUriMethod.indexOfFirstInstruction {
+                        opcode == Opcode.INVOKE_DIRECT && ((this as Instruction35c).reference as MethodReference).name == "<init>"
+                    }
+                val secondIndex =
+                    downloadUriMethod.indexOfFirstInstruction {
+                        opcode == Opcode.INVOKE_STATIC &&
+                            ((this as Instruction35c).reference as MethodReference).returnType.contains(
+                                "Uri"
+                            )
+                    }
 
                 downloadUriMethod.addInstructions(
                     secondIndex,

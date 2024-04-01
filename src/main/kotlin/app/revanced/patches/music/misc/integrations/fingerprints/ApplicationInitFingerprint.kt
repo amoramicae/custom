@@ -6,7 +6,8 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object ApplicationInitFingerprint : IntegrationsFingerprint(
     returnType = "V",
     parameters = emptyList(),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.NEW_INSTANCE,
         Opcode.INVOKE_DIRECT,
         Opcode.INVOKE_STATIC,
@@ -15,5 +16,5 @@ internal object ApplicationInitFingerprint : IntegrationsFingerprint(
         Opcode.INVOKE_VIRTUAL
     ),
     strings = listOf("activity"),
-    customFingerprint = { methodDef, _ -> methodDef.name == "onCreate" },
+    customFingerprint = { methodDef, _ -> methodDef.name == "onCreate" }
 )

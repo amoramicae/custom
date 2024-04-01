@@ -1,13 +1,12 @@
 package app.revanced.patches.reddit.misc.tracking.url
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.reddit.misc.tracking.url.fingerprints.ShareLinkFormatterFingerprint
-
+import app.revanced.util.exception
 
 @Patch(
     name = "Sanitize sharing links",
@@ -17,7 +16,6 @@ import app.revanced.patches.reddit.misc.tracking.url.fingerprints.ShareLinkForma
 @Suppress("unused")
 object SanitizeUrlQueryPatch : BytecodePatch(setOf(ShareLinkFormatterFingerprint)) {
     override fun execute(context: BytecodeContext) {
-
         ShareLinkFormatterFingerprint.result?.mutableMethod?.addInstructions(
             0,
             "return-object p0"

@@ -7,7 +7,6 @@ import app.revanced.patches.reddit.customclients.BaseSpoofClientPatch
 import app.revanced.patches.reddit.customclients.boostforreddit.api.fingerprints.GetClientIdFingerprint
 import app.revanced.patches.reddit.customclients.boostforreddit.api.fingerprints.LoginActivityOnCreateFingerprint
 
-
 @Suppress("unused")
 object SpoofClientPatch : BaseSpoofClientPatch(
     redirectUri = "http://rubenmayayo.com",

@@ -21,24 +21,25 @@ object SpoofClientPatch : BaseSpoofClientPatch(
         first().mutableClass.methods.apply {
             val getClientIdMethod = single { it.name == "getId" }.also(::remove)
 
-            val newGetClientIdMethod = ImmutableMethod(
-                getClientIdMethod.definingClass,
-                getClientIdMethod.name,
-                null,
-                getClientIdMethod.returnType,
-                AccessFlags.PUBLIC or AccessFlags.STATIC,
-                null,
-                null,
-                ImmutableMethodImplementation(
-                    1,
-                    """
+            val newGetClientIdMethod =
+                ImmutableMethod(
+                    getClientIdMethod.definingClass,
+                    getClientIdMethod.name,
+                    null,
+                    getClientIdMethod.returnType,
+                    AccessFlags.PUBLIC or AccessFlags.STATIC,
+                    null,
+                    null,
+                    ImmutableMethodImplementation(
+                        1,
+                        """
                         const-string v0, "$clientId"
                         return-object v0
                     """.toInstructions(getClientIdMethod),
-                    null,
-                    null,
-                ),
-            ).toMutable()
+                        null,
+                        null
+                    )
+                ).toMutable()
 
             add(newGetClientIdMethod)
         }

@@ -15,15 +15,19 @@ import org.w3c.dom.Node
 class StringResource(
     name: String,
     val value: String,
-    val formatted: Boolean = true,
+    val formatted: Boolean = true
 ) : BaseResource(name, "string") {
-    override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
+    override fun serialize(
+        ownerDocument: Document,
+        resourceCallback: (BaseResource) -> Unit
+    ) =
         super.serialize(ownerDocument, resourceCallback).apply {
             // if the string is un-formatted, explicitly add the formatted attribute
             if (!formatted) setAttribute("formatted", "false")
 
-            if (value.contains(Regex("(?<!\\\\)['\"]")))
+            if (value.contains(Regex("(?<!\\\\)['\"]"))) {
                 throw PatchException("String $name cannot contain unescaped quotes in value \"$value\".")
+            }
 
             textContent = value
         }

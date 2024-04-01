@@ -1,12 +1,12 @@
 package app.revanced.patches.scbeasy.detection.debugging
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.scbeasy.detection.debugging.fingerprints.DebuggingDetectionFingerprint
+import app.revanced.util.exception
 
 @Patch(
     use = false,

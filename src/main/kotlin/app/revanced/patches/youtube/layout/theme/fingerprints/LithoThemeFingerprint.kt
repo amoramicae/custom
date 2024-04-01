@@ -9,7 +9,8 @@ internal object LithoThemeFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PROTECTED or AccessFlags.FINAL,
     parameters = listOf("Landroid/graphics/Rect;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.APUT,
         Opcode.NEW_INSTANCE,
         Opcode.INVOKE_DIRECT,

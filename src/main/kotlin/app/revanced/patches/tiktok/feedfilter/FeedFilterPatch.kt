@@ -16,8 +16,9 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 @Patch(
     name = "Feed filter",
-    description = "Removes ads, livestreams, stories, image videos " +
-            "and videos with a specific amount of views or likes from the feed.",
+    description =
+    "Removes ads, livestreams, stories, image videos " +
+        "and videos with a specific amount of views or likes from the feed.",
     dependencies = [IntegrationsPatch::class, SettingsPatch::class],
     compatiblePackages = [
         CompatiblePackage("com.ss.android.ugc.trill", ["32.5.3"]),
@@ -36,7 +37,7 @@ object FeedFilterPatch : BytecodePatch(
             addInstruction(
                 returnFeedItemInstruction.location.index,
                 "invoke-static { v$feedItemsRegister }, " +
-                        "Lapp/revanced/integrations/tiktok/feedfilter/FeedItemsFilter;->filter(Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;)V"
+                    "Lapp/revanced/integrations/tiktok/feedfilter/FeedItemsFilter;->filter(Lcom/ss/android/ugc/aweme/feed/model/FeedItemList;)V"
             )
         } ?: throw FeedApiServiceLIZFingerprint.exception
 

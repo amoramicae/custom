@@ -9,7 +9,8 @@ internal object SetPivotBarVisibilityFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PRIVATE or AccessFlags.FINAL,
     parameters = listOf("Z"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CHECK_CAST,
         Opcode.IF_EQZ
     )

@@ -7,7 +7,8 @@ import com.android.tools.smali.dexlib2.AccessFlags
 internal object SetSpeedFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.STATIC,
-    parameters = listOf(
+    parameters =
+    listOf(
         "Ljava/lang/String;",
         "Lcom/ss/android/ugc/aweme/feed/model/Aweme;",
         "F"

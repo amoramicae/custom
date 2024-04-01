@@ -9,7 +9,8 @@ internal object ControlsOverlayFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PRIVATE or AccessFlags.FINAL,
     parameters = listOf(),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_VIRTUAL,
         Opcode.MOVE_RESULT_OBJECT,
         Opcode.CHECK_CAST, // R.id.inset_overlay_view_layout

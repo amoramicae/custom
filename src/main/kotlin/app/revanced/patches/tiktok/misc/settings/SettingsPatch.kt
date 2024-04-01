@@ -33,7 +33,7 @@ object SettingsPatch : BytecodePatch(
         AdPersonalizationActivityOnCreateFingerprint,
         AddSettingsEntryFingerprint,
         SettingsEntryFingerprint,
-        SettingsEntryInfoFingerprint,
+        SettingsEntryInfoFingerprint
     )
 ) {
     private const val INTEGRATIONS_CLASS_DESCRIPTOR =
@@ -41,27 +41,30 @@ object SettingsPatch : BytecodePatch(
 
     private const val INITIALIZE_SETTINGS_METHOD_DESCRIPTOR =
         "$INTEGRATIONS_CLASS_DESCRIPTOR->initialize(" +
-                "Lcom/bytedance/ies/ugc/aweme/commercialize/compliance/personalization/AdPersonalizationActivity;" +
-                ")Z"
+            "Lcom/bytedance/ies/ugc/aweme/commercialize/compliance/personalization/AdPersonalizationActivity;" +
+            ")Z"
 
     private const val CREATE_SETTINGS_ENTRY_METHOD_DESCRIPTOR =
         "$INTEGRATIONS_CLASS_DESCRIPTOR->createSettingsEntry(" +
-                "Ljava/lang/String;" +
-                "Ljava/lang/String;" +
-                ")Ljava/lang/Object;"
+            "Ljava/lang/String;" +
+            "Ljava/lang/String;" +
+            ")Ljava/lang/Object;"
 
     override fun execute(context: BytecodeContext) {
         // Find the class name of classes which construct a settings entry
-        val settingsButtonClass = SettingsEntryFingerprint.result?.classDef?.type?.toClassName()
-            ?: throw SettingsEntryFingerprint.exception
-        val settingsButtonInfoClass = SettingsEntryInfoFingerprint.result?.classDef?.type?.toClassName()
-            ?: throw SettingsEntryInfoFingerprint.exception
+        val settingsButtonClass =
+            SettingsEntryFingerprint.result?.classDef?.type?.toClassName()
+                ?: throw SettingsEntryFingerprint.exception
+        val settingsButtonInfoClass =
+            SettingsEntryInfoFingerprint.result?.classDef?.type?.toClassName()
+                ?: throw SettingsEntryInfoFingerprint.exception
 
         // Create a settings entry for 'revanced settings' and add it to settings fragment
         AddSettingsEntryFingerprint.result?.mutableMethod?.apply {
-            val markIndex = implementation!!.instructions.indexOfFirst {
-                it.opcode == Opcode.IGET_OBJECT && ((it as Instruction22c).reference as FieldReference).name == "headerUnit"
-            }
+            val markIndex =
+                implementation!!.instructions.indexOfFirst {
+                    it.opcode == Opcode.IGET_OBJECT && ((it as Instruction22c).reference as FieldReference).name == "headerUnit"
+                }
 
             val getUnitManager = getInstruction(markIndex + 2)
             val addEntry = getInstruction(markIndex + 1)
@@ -87,9 +90,10 @@ object SettingsPatch : BytecodePatch(
 
         // Initialize the settings menu once the replaced setting entry is clicked.
         AdPersonalizationActivityOnCreateFingerprint.result?.mutableMethod?.apply {
-            val initializeSettingsIndex = implementation!!.instructions.indexOfFirst {
-                it.opcode == Opcode.INVOKE_SUPER
-            } + 1
+            val initializeSettingsIndex =
+                implementation!!.instructions.indexOfFirst {
+                    it.opcode == Opcode.INVOKE_SUPER
+                } + 1
 
             val thisRegister = getInstruction<Instruction35c>(initializeSettingsIndex - 1).registerC
             val usableRegister = implementation!!.registerCount - parameters.size - 2

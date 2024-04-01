@@ -8,14 +8,17 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object DownloadPathParentFingerprint : MethodFingerprint(
     "L",
     AccessFlags.PUBLIC or AccessFlags.STATIC,
-    strings = listOf(
+    strings =
+    listOf(
         "video/mp4"
     ),
-    parameters = listOf(
+    parameters =
+    listOf(
         "L",
         "L"
     ),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CONST_STRING,
         Opcode.INVOKE_STATIC,
         Opcode.MOVE_RESULT_OBJECT,

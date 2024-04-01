@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.misc.settings.SettingsPatch
         SettingsPatch::class,
         ResourceMappingPatch::class,
         AddResourcesPatch::class
-    ],
+    ]
 )
 internal object DisableSuggestedVideoEndScreenResourcePatch : ResourcePatch() {
     internal var sizeAdjustableLiteAutoNavOverlay: Long = -1
@@ -25,8 +25,9 @@ internal object DisableSuggestedVideoEndScreenResourcePatch : ResourcePatch() {
             SwitchPreference("revanced_disable_suggested_video_end_screen")
         )
 
-        sizeAdjustableLiteAutoNavOverlay = ResourceMappingPatch.resourceMappings.single {
-            it.type == "layout" && it.name == "size_adjustable_lite_autonav_overlay"
-        }.id
+        sizeAdjustableLiteAutoNavOverlay =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "layout" && it.name == "size_adjustable_lite_autonav_overlay"
+            }.id
     }
 }

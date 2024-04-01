@@ -4,7 +4,8 @@ import app.revanced.patcher.fingerprint.MethodFingerprint
 import com.android.tools.smali.dexlib2.Opcode
 
 internal object LoginActivityOnCreateFingerprint : MethodFingerprint(
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.MOVE_RESULT_OBJECT,
         Opcode.CONST_4
     ),

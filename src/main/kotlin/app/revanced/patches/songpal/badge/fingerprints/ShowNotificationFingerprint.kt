@@ -28,10 +28,11 @@ internal object ShowNotificationFingerprint : MethodFingerprint(
         } ?: false
     }
 ) {
-    val expectedReference = ImmutableMethodReference(
-        "Lcom/google/android/material/bottomnavigation/BottomNavigationView;",
-        "getOrCreateBadge", // Non-obfuscated placeholder method name.
-        listOf("I"),
-        "Lcom/google/android/material/badge/BadgeDrawable;",
-    )
+    val expectedReference =
+        ImmutableMethodReference(
+            "Lcom/google/android/material/bottomnavigation/BottomNavigationView;",
+            "getOrCreateBadge", // Non-obfuscated placeholder method name.
+            listOf("I"),
+            "Lcom/google/android/material/badge/BadgeDrawable;"
+        )
 }

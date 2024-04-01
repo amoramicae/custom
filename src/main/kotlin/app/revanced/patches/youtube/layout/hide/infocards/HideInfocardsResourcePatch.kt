@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.misc.settings.SettingsPatch
         SettingsPatch::class,
         ResourceMappingPatch::class,
         AddResourcesPatch::class
-    ],
+    ]
 )
 object HideInfocardsResourcePatch : ResourcePatch() {
     internal var drawerResourceId: Long = -1
@@ -25,8 +25,9 @@ object HideInfocardsResourcePatch : ResourcePatch() {
             SwitchPreference("revanced_hide_info_cards")
         )
 
-        drawerResourceId = ResourceMappingPatch.resourceMappings.single {
-            it.type == "id" && it.name == "info_cards_drawer_header"
-        }.id
+        drawerResourceId =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "id" && it.name == "info_cards_drawer_header"
+            }.id
     }
 }

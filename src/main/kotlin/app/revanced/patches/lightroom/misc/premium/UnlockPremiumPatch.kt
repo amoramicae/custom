@@ -1,12 +1,12 @@
 package app.revanced.patches.lightroom.misc.premium
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.revanced.patcher.patch.BytecodePatch
 import app.revanced.patcher.patch.annotation.CompatiblePackage
 import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.lightroom.misc.premium.fingerprints.HasPurchasedFingerprint
+import app.revanced.util.exception
 
 @Patch(
     name = "Unlock premium",
@@ -15,9 +15,9 @@ import app.revanced.patches.lightroom.misc.premium.fingerprints.HasPurchasedFing
 @Suppress("unused")
 object UnlockPremiumPatch : BytecodePatch(
     setOf(HasPurchasedFingerprint)
-){
+) {
     override fun execute(context: BytecodeContext) {
-         // Set hasPremium = true.
+        // Set hasPremium = true.
         HasPurchasedFingerprint.result?.mutableMethod?.replaceInstruction(2, "const/4 v2, 0x1")
             ?: throw HasPurchasedFingerprint.exception
     }

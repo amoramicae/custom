@@ -1,6 +1,5 @@
 package app.revanced.patches.memegenerator.misc.pro
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.replaceInstructions
 import app.revanced.patcher.patch.BytecodePatch
@@ -9,6 +8,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.memegenerator.detection.license.LicenseValidationPatch
 import app.revanced.patches.memegenerator.detection.signature.SignatureVerificationPatch
 import app.revanced.patches.memegenerator.misc.pro.fingerprints.IsFreeVersionFingerprint
+import app.revanced.util.exception
 
 @Patch(
     name = "Unlock pro",
@@ -18,7 +18,8 @@ import app.revanced.patches.memegenerator.misc.pro.fingerprints.IsFreeVersionFin
     ],
     compatiblePackages = [
         CompatiblePackage(
-            "com.zombodroid.MemeGenerator", [
+            "com.zombodroid.MemeGenerator",
+            [
                 "4.6364",
                 "4.6370",
                 "4.6375",
@@ -33,7 +34,8 @@ object UnlockProVersionPatch : BytecodePatch(
 ) {
     override fun execute(context: BytecodeContext) {
         IsFreeVersionFingerprint.result?.apply {
-            mutableMethod.replaceInstructions(0,
+            mutableMethod.replaceInstructions(
+                0,
                 """
                     sget-object p0, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
                     return-object p0

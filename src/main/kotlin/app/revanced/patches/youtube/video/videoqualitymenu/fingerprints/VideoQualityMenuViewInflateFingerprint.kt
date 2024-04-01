@@ -10,7 +10,8 @@ internal object VideoQualityMenuViewInflateFingerprint : LiteralValueFingerprint
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L", "L", "L"),
     returnType = "L",
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_SUPER,
         Opcode.CONST,
         Opcode.CONST_4,

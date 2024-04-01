@@ -5,7 +5,8 @@ import app.revanced.patcher.fingerprint.MethodFingerprint
 internal object ConversionContextFingerprint : MethodFingerprint(
     returnType = "Ljava/lang/String;",
     parameters = listOf(),
-    strings = listOf(
+    strings =
+    listOf(
         ", widthConstraint=",
         ", heightConstraint=",
         ", templateLoggerFactory=",

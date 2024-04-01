@@ -10,7 +10,8 @@ internal object KidsMinimizedPlaybackPolicyControllerFingerprint : MethodFingerp
     returnType = "V",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("I", "L", "L"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.CONST_4,
         Opcode.IF_NE,
         Opcode.SGET_OBJECT,

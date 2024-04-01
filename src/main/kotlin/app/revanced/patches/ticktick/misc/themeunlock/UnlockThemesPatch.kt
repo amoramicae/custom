@@ -15,7 +15,7 @@ import app.revanced.patches.ticktick.misc.themeunlock.fingerprints.SetThemeFinge
     compatiblePackages = [CompatiblePackage("com.ticktick.task")]
 )
 @Suppress("unused")
-object UnlockProPatch : BytecodePatch(setOf(CheckLockedThemesFingerprint, SetThemeFingerprint)) {
+object UnlockThemesPatch : BytecodePatch(setOf(CheckLockedThemesFingerprint, SetThemeFingerprint)) {
     override fun execute(context: BytecodeContext) {
         val lockedThemesMethod = CheckLockedThemesFingerprint.result!!.mutableMethod
         lockedThemesMethod.addInstructions(
@@ -25,7 +25,7 @@ object UnlockProPatch : BytecodePatch(setOf(CheckLockedThemesFingerprint, SetThe
                 return v0
             """
         )
-        
+
         val setThemeMethod = SetThemeFingerprint.result!!.mutableMethod
         setThemeMethod.removeInstructions(0, 10)
     }

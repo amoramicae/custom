@@ -6,17 +6,17 @@ import com.android.tools.smali.dexlib2.AccessFlags
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.NarrowLiteralInstruction
 
-
 internal object SeekbarTappingFingerprint : MethodFingerprint(
     returnType = "Z",
     accessFlags = AccessFlags.PUBLIC or AccessFlags.FINAL,
     parameters = listOf("L"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.IPUT_OBJECT,
         Opcode.INVOKE_VIRTUAL,
         // Insert seekbar tapping instructions here.
         Opcode.RETURN,
-        Opcode.INVOKE_VIRTUAL,
+        Opcode.INVOKE_VIRTUAL
     ),
     customFingerprint = custom@{ methodDef, _ ->
         if (methodDef.name != "onTouchEvent") return@custom false

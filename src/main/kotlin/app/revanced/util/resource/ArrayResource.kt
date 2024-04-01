@@ -13,16 +13,21 @@ import org.w3c.dom.Node
 @Suppress("MemberVisibilityCanBePrivate")
 class ArrayResource(
     name: String,
-    val items: List<String>,
+    val items: List<String>
 ) : BaseResource(name, "string-array") {
-    override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
+    override fun serialize(
+        ownerDocument: Document,
+        resourceCallback: (BaseResource) -> Unit
+    ) =
         super.serialize(ownerDocument, resourceCallback).apply {
             setAttribute("name", name)
 
             items.forEach { item ->
-                appendChild(ownerDocument.createElement("item").also { itemNode ->
-                    itemNode.textContent = item
-                })
+                appendChild(
+                    ownerDocument.createElement("item").also { itemNode ->
+                        itemNode.textContent = item
+                    }
+                )
             }
         }
 

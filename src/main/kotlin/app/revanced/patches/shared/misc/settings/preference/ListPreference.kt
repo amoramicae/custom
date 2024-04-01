@@ -50,7 +50,10 @@ class ListPreference(
         this.entryValues = entryValues
     }
 
-    override fun serialize(ownerDocument: Document, resourceCallback: (BaseResource) -> Unit) =
+    override fun serialize(
+        ownerDocument: Document,
+        resourceCallback: (BaseResource) -> Unit
+    ) =
         super.serialize(ownerDocument, resourceCallback).apply {
             val entriesArrayName = entries?.also { resourceCallback.invoke(it) }?.name ?: entriesKey
             val entryValuesArrayName = entryValues?.also { resourceCallback.invoke(it) }?.name ?: entryValuesKey

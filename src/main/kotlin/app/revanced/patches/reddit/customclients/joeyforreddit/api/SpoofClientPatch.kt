@@ -7,12 +7,12 @@ import app.revanced.patches.reddit.customclients.BaseSpoofClientPatch
 import app.revanced.patches.reddit.customclients.joeyforreddit.api.fingerprints.GetClientIdFingerprint
 import app.revanced.patches.reddit.customclients.joeyforreddit.detection.piracy.DisablePiracyDetectionPatch
 
-
 @Suppress("unused")
 object SpoofClientPatch : BaseSpoofClientPatch(
     redirectUri = "https://127.0.0.1:65023/authorize_callback",
     clientIdFingerprints = setOf(GetClientIdFingerprint),
-    compatiblePackages = setOf(
+    compatiblePackages =
+    setOf(
         CompatiblePackage("o.o.joey"),
         CompatiblePackage("o.o.joey.pro"),
         CompatiblePackage("o.o.joey.dev")

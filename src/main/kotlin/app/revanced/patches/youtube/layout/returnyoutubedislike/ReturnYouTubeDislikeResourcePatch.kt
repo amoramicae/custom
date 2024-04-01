@@ -21,15 +21,17 @@ internal object ReturnYouTubeDislikeResourcePatch : ResourcePatch() {
     override fun execute(context: ResourceContext) {
         AddResourcesPatch(this::class)
 
-        SettingsResourcePatch += IntentPreference(
-            key = "revanced_settings_screen_09",
-            titleKey = "revanced_ryd_settings_title",
-            summaryKey = null,
-            intent = SettingsPatch.newIntent("revanced_ryd_settings_intent")
-        )
+        SettingsResourcePatch +=
+            IntentPreference(
+                key = "revanced_settings_screen_09",
+                titleKey = "revanced_ryd_settings_title",
+                summaryKey = null,
+                intent = SettingsPatch.newIntent("revanced_ryd_settings_intent")
+            )
 
-        oldUIDislikeId = ResourceMappingPatch.resourceMappings.single {
-            it.type == "id" && it.name == "dislike_button"
-        }.id
+        oldUIDislikeId =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "id" && it.name == "dislike_button"
+            }.id
     }
 }

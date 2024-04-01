@@ -4,7 +4,8 @@ import app.revanced.patcher.fingerprint.MethodFingerprint
 import com.android.tools.smali.dexlib2.Opcode
 
 internal object CreateSearchSuggestionsFingerprint : MethodFingerprint(
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.INVOKE_STATIC,
         Opcode.MOVE_RESULT,
         Opcode.CONST_4

@@ -17,7 +17,7 @@ object UnlockPremiumPatch : BytecodePatch(
     setOf(YukaUserConstructorFingerprint)
 ) {
     override fun execute(context: BytecodeContext) {
-        IsPremiumFingerprint.resolve(context,YukaUserConstructorFingerprint.result!!.classDef)
+        IsPremiumFingerprint.resolve(context, YukaUserConstructorFingerprint.result!!.classDef)
         val method = IsPremiumFingerprint.result!!.mutableMethod
         method.addInstructions(
             0,

@@ -1,6 +1,5 @@
 package app.revanced.patches.youtube.misc.playertype
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -10,6 +9,7 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patches.youtube.misc.integrations.IntegrationsPatch
 import app.revanced.patches.youtube.misc.playertype.fingerprint.PlayerTypeFingerprint
 import app.revanced.patches.youtube.misc.playertype.fingerprint.VideoStateFingerprint
+import app.revanced.util.exception
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
 @Patch(

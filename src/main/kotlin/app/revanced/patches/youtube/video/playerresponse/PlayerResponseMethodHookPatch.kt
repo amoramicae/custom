@@ -1,6 +1,5 @@
 package app.revanced.patches.youtube.video.playerresponse
 
-import app.revanced.util.exception
 import app.revanced.patcher.data.BytecodeContext
 import app.revanced.patcher.extensions.InstructionExtensions.addInstruction
 import app.revanced.patcher.extensions.InstructionExtensions.addInstructions
@@ -9,16 +8,16 @@ import app.revanced.patcher.patch.annotation.Patch
 import app.revanced.patcher.util.proxy.mutableTypes.MutableMethod
 import app.revanced.patches.youtube.misc.integrations.IntegrationsPatch
 import app.revanced.patches.youtube.video.playerresponse.fingerprint.PlayerParameterBuilderFingerprint
+import app.revanced.util.exception
 import java.io.Closeable
 
 @Patch(
-    dependencies = [IntegrationsPatch::class],
+    dependencies = [IntegrationsPatch::class]
 )
 object PlayerResponseMethodHookPatch :
     BytecodePatch(setOf(PlayerParameterBuilderFingerprint)),
     Closeable,
     MutableSet<PlayerResponseMethodHookPatch.Hook> by mutableSetOf() {
-
     // Parameter numbers of the patched method.
     private const val PARAMETER_VIDEO_ID = 1
     private const val PARAMETER_PROTO_BUFFER = 3
@@ -41,7 +40,8 @@ object PlayerResponseMethodHookPatch :
     override fun close() {
         fun hookVideoId(hook: Hook) {
             playerResponseMethod.addInstruction(
-                0, "invoke-static {v$REGISTER_VIDEO_ID, v$REGISTER_IS_SHORT_AND_OPENING_OR_PLAYING}, $hook"
+                0,
+                "invoke-static {v$REGISTER_VIDEO_ID, v$REGISTER_IS_SHORT_AND_OPENING_OR_PLAYING}, $hook"
             )
             numberOfInstructionsAdded++
         }
@@ -70,11 +70,12 @@ object PlayerResponseMethodHookPatch :
         // On some app targets the method has too many registers pushing the parameters past v15.
         // Move the parameters to 4-bit registers so they can be passed to integrations.
         playerResponseMethod.addInstructions(
-            0, """
+            0,
+            """
                 move-object/from16 v$REGISTER_VIDEO_ID, p$PARAMETER_VIDEO_ID
                 move-object/from16 v$REGISTER_PROTO_BUFFER, p$PARAMETER_PROTO_BUFFER
                 move/from16        v$REGISTER_IS_SHORT_AND_OPENING_OR_PLAYING, p$PARAMETER_IS_SHORT_AND_OPENING_OR_PLAYING
-            """,
+            """
         )
         numberOfInstructionsAdded += 3
 
@@ -89,9 +90,9 @@ object PlayerResponseMethodHookPatch :
         internal class VideoId(methodDescriptor: String) : Hook(methodDescriptor)
 
         internal class ProtoBufferParameter(methodDescriptor: String) : Hook(methodDescriptor)
+
         internal class ProtoBufferParameterBeforeVideoId(methodDescriptor: String) : Hook(methodDescriptor)
 
         override fun toString() = methodDescriptor
     }
 }
-

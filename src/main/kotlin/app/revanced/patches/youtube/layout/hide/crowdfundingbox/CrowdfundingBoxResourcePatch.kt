@@ -13,7 +13,7 @@ import app.revanced.patches.youtube.misc.settings.SettingsPatch
         SettingsPatch::class,
         ResourceMappingPatch::class,
         AddResourcesPatch::class
-    ],
+    ]
 )
 internal object CrowdfundingBoxResourcePatch : ResourcePatch() {
     internal var crowdfundingBoxId: Long = -1
@@ -25,8 +25,9 @@ internal object CrowdfundingBoxResourcePatch : ResourcePatch() {
             SwitchPreference("revanced_hide_crowdfunding_box")
         )
 
-        crowdfundingBoxId = ResourceMappingPatch.resourceMappings.single {
-            it.type == "layout" && it.name == "donation_companion"
-        }.id
+        crowdfundingBoxId =
+            ResourceMappingPatch.resourceMappings.single {
+                it.type == "layout" && it.name == "donation_companion"
+            }.id
     }
 }

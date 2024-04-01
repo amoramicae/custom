@@ -6,7 +6,8 @@ import com.android.tools.smali.dexlib2.Opcode
 internal object CopyTextFingerprint : MethodFingerprint(
     returnType = "V",
     parameters = listOf("L", "Ljava/util/Map;"),
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.IGET_OBJECT, // Contains the text to copy to be sanitized.
         Opcode.CONST_STRING,
         Opcode.INVOKE_STATIC, // ClipData.newPlainText

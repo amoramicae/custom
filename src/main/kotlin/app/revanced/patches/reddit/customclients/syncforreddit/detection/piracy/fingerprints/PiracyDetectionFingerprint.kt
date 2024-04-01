@@ -9,7 +9,8 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 internal object PiracyDetectionFingerprint : MethodFingerprint(
     returnType = "V",
     accessFlags = AccessFlags.PRIVATE or AccessFlags.FINAL,
-    opcodes = listOf(
+    opcodes =
+    listOf(
         Opcode.NEW_INSTANCE,
         Opcode.INVOKE_DIRECT,
         Opcode.NEW_INSTANCE,
