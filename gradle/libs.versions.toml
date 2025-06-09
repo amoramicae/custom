@@ -1,5 +1,7 @@
 [versions]
+
 revanced-patcher = "21.0.0"
+
 smali = "3.0.5"
 agp = "8.2.2"
 annotation = "1.7.1"
@@ -7,17 +9,17 @@ appcompat = "1.7.0"
 constraintlayout = "2.1.4"
 core = "1.12.0"
 material = "1.11.0"
-
+guava = "33.4.0-jre"
 [libraries]
-# Core dependency for patches
-revanced-patcher = { group = "app.revanced", name = "revanced-patcher", version.ref = "revanced-patcher" }
 
-# Dependencies for the various 'extensions' modules in the template
+revanced-patcher = { group = "app.revanced", name = "revanced-patcher", version.ref = "revanced-patcher" }
+This was the library causing the latest failure.
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+Dependencies for the various 'extensions' modules
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 core = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
