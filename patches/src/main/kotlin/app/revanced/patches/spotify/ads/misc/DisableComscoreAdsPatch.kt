@@ -1,5 +1,7 @@
 package app.revanced.patches.spotify.ads.misc
 
+// These are the imports that I failed to provide.
+// They tell the compiler where to find all the annotations and classes.
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Patch
