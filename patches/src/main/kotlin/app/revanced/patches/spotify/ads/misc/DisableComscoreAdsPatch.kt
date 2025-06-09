@@ -1,7 +1,6 @@
 package app.revanced.patches.spotify.ads.misc
 
-// These are the imports that I failed to provide.
-// They tell the compiler where to find all the annotations and classes.
+// Required imports for ReVanced patcher
 import app.revanced.patcher.annotation.Description
 import app.revanced.patcher.annotation.Name
 import app.revanced.patcher.annotation.Patch
@@ -15,7 +14,6 @@ import app.revanced.patcher.util.Logger
 @Name("disable-comscore-ads")
 @Description("Disables advertisements by neutralizing the Comscore analytics SDK.")
 object DisableComscoreAdsPatch {
-
     @Target(
         value = "com.comscore.android.p002id.IdHelperAndroid",
         method = "isAdvertisementIdValid",
