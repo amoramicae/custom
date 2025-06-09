@@ -681,6 +681,9 @@ Second \"item\" text"</string>
   <string name="revanced_hide_autoplay_button_title">Скрыть кнопку \"Автовоспроизведение\"</string>
   <string name="revanced_hide_autoplay_button_summary_on">Кнопка \"Автовоспроизведение\" в плеере скрыта</string>
   <string name="revanced_hide_autoplay_button_summary_off">Кнопка \"Автовоспроизведение\" в плеере показана</string>
+  <string name="revanced_hide_player_control_buttons_background_title">Скрыть фон кнопок управления проигрывателем</string>
+  <string name="revanced_hide_player_control_buttons_background_summary_on">Фон кнопок управления проигрывателем скрыт</string>
+  <string name="revanced_hide_player_control_buttons_background_summary_off">Фон кнопок управления проигрывателем отображается</string>
   </patch>
   <patch id="layout.hide.endscreencards.hideEndscreenCardsResourcePatch">
   <string name="revanced_hide_endscreen_cards_title">Скрыть заставки следующих видео</string>
@@ -765,6 +768,9 @@ Second \"item\" text"</string>
   <string name="revanced_hide_shorts_green_screen_button_title">Скрыть кнопку \"Зеленый экран\"</string>
   <string name="revanced_hide_shorts_green_screen_button_summary_on">Кнопка \"Зеленый экран\" в Shorts скрыта</string>
   <string name="revanced_hide_shorts_green_screen_button_summary_off">Кнопка \"Зеленый экран\" в Shorts показана</string>
+  <string name="revanced_hide_shorts_new_posts_button_title">Скрыть кнопку \"Новые публикации\"</string>
+  <string name="revanced_hide_shorts_new_posts_button_summary_off">Кнопка \"Новые публикации\" отображается</string>
+  <string name="revanced_hide_shorts_new_posts_button_summary_on">Кнопка \"Новые публикации\" скрыта</string>
   <string name="revanced_hide_shorts_hashtag_button_title">Скрыть кнопку хэштега</string>
   <string name="revanced_hide_shorts_hashtag_button_summary_on">Кнопка хэштега в Shorts скрыта</string>
   <string name="revanced_hide_shorts_hashtag_button_summary_off">Кнопка хэштега в Shorts показана</string>

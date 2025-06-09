@@ -681,6 +681,9 @@ Nếu việc thay đổi cài đặt này không có hiệu lực, hãy thử ch
   <string name="revanced_hide_autoplay_button_title">Ẩn nút Tự động phát</string>
   <string name="revanced_hide_autoplay_button_summary_on">Nút tự động phát đã bị ẩn</string>
   <string name="revanced_hide_autoplay_button_summary_off">Nút tự động phát được hiển thị</string>
+  <string name="revanced_hide_player_control_buttons_background_title">Ẩn nền của các nút điều khiển trình phát</string>
+  <string name="revanced_hide_player_control_buttons_background_summary_on">Đã ẩn nền của các nút điều khiển trình phát</string>
+  <string name="revanced_hide_player_control_buttons_background_summary_off">Đang hiển thị nền của các nút điều khiển trình phát</string>
   </patch>
   <patch id="layout.hide.endscreencards.hideEndscreenCardsResourcePatch">
   <string name="revanced_hide_endscreen_cards_title">Ẩn thẻ kết thúc màn hình</string>
@@ -765,6 +768,9 @@ Nếu việc thay đổi cài đặt này không có hiệu lực, hãy thử ch
   <string name="revanced_hide_shorts_green_screen_button_title">Ẩn nút Phông xanh</string>
   <string name="revanced_hide_shorts_green_screen_button_summary_on">Nút phông xanh đã bị ẩn</string>
   <string name="revanced_hide_shorts_green_screen_button_summary_off">Nút phông xanh được hiển thị</string>
+  <string name="revanced_hide_shorts_new_posts_button_title">Ẩn nút Bài đăng mới</string>
+  <string name="revanced_hide_shorts_new_posts_button_summary_off">Nút Bài đăng mới đang hiển thị</string>
+  <string name="revanced_hide_shorts_new_posts_button_summary_on">Nút Bài đăng mới đã bị ẩn</string>
   <string name="revanced_hide_shorts_hashtag_button_title">Ẩn nút hashtag</string>
   <string name="revanced_hide_shorts_hashtag_button_summary_on">Nút hashtag đã bị ẩn</string>
   <string name="revanced_hide_shorts_hashtag_button_summary_off">Nút hashtag được hiển thị</string>
