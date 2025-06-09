@@ -1,24 +1,23 @@
 [versions]
 revanced-patcher = "21.0.0"
-# Tracking https://github.com/google/smali/issues/64.
-#noinspection GradleDependency
 smali = "3.0.5"
-# 8.3.0 causes java verifier error: https://github.com/ReVanced/revanced-patches/issues/2818.
-#noinspection GradleDependency
 agp = "8.2.2"
-annotation = "1.9.1"
+annotation = "1.7.1"
 appcompat = "1.7.0"
-okhttp = "5.0.0-alpha.14"
-retrofit = "2.11.0"
-guava = "33.4.0-jre"
+constraintlayout = "2.1.4"
+core = "1.12.0"
+material = "1.11.0"
 
 [libraries]
-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-guava = { module = "com.google.guava:guava", version.ref = "guava" }
+# Core dependency for patches
+revanced-patcher = { group = "app.revanced", name = "revanced-patcher", version.ref = "revanced-patcher" }
 
+# Dependencies for the various 'extensions' modules in the template
+annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+core = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
