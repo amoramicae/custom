@@ -14,7 +14,6 @@ guava = "33.4.0-jre"
 [libraries]
 # Core dependency for the 'patches' module in the template
 revanced-patcher = { group = "app.revanced", name = "revanced-patcher", version.ref = "revanced-patcher" }
-
 # All required libraries for the various 'extensions' modules
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
