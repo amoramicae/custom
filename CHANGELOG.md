@@ -1,3 +1,10 @@
+## [5.26.1](https://github.com/amoramicae/custom/compare/v5.26.0...v5.26.1) (2025-06-09)
+
+
+### Bug Fixes
+
+* trigger release ([54c9d19](https://github.com/amoramicae/custom/commit/54c9d19f588757ee8a7b76af02c34a6d01f70090))
+
 # [5.26.0](https://github.com/ReVanced/revanced-patches/compare/v5.25.0...v5.26.0) (2025-06-04)
 
 
