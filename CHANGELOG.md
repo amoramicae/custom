@@ -1,3 +1,11 @@
+## [5.26.3](https://github.com/amoramicae/custom/compare/v5.26.2...v5.26.3) (2025-06-09)
+
+
+### Bug Fixes
+
+* re-trigger release after fixing GPG configuration ([2816145](https://github.com/amoramicae/custom/commit/28161452260c1d383d22d3a27ea981a282a13eca))
+* re-trigger release with correct GPG configuration ([bf0b830](https://github.com/amoramicae/custom/commit/bf0b83074d457d9ca48d4886c772674df851d703))
+
 ## [5.26.2](https://github.com/amoramicae/custom/compare/v5.26.1...v5.26.2) (2025-06-09)
 
 
