@@ -1,6 +1,5 @@
 package app.revanced.extension.youtube.settings.preference;
 
-import static app.revanced.extension.shared.StringRef.sf;
 import static app.revanced.extension.shared.Utils.dipToPixels;
 
 import android.app.Dialog;
@@ -19,58 +18,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import app.revanced.extension.shared.Utils;
-import app.revanced.extension.youtube.patches.playback.speed.CustomPlaybackSpeedPatch;
-import app.revanced.extension.youtube.settings.Settings;
 
 /**
  * A custom ListPreference that uses a styled custom dialog with a custom checkmark indicator.
- * Custom video speeds used by {@link CustomPlaybackSpeedPatch}.
  */
 @SuppressWarnings({"unused", "deprecation"})
-public final class CustomVideoSpeedListPreference extends ListPreference {
+public class CustomDialogListPreference extends ListPreference {
 
-    /**
-     * Initialize a settings preference list with the available playback speeds.
-     */
-    private void initializeEntryValues() {
-        float[] customPlaybackSpeeds = CustomPlaybackSpeedPatch.customPlaybackSpeeds;
-        final int numberOfEntries = customPlaybackSpeeds.length + 1;
-        String[] preferenceListEntries = new String[numberOfEntries];
-        String[] preferenceListEntryValues = new String[numberOfEntries];
-
-        // Auto speed (same behavior as unpatched).
-        preferenceListEntries[0] = sf("revanced_custom_playback_speeds_auto").toString();
-        preferenceListEntryValues[0] = String.valueOf(Settings.PLAYBACK_SPEED_DEFAULT.defaultValue);
-
-        int i = 1;
-        for (float speed : customPlaybackSpeeds) {
-            String speedString = String.valueOf(speed);
-            preferenceListEntries[i] = speedString + "x";
-            preferenceListEntryValues[i] = speedString;
-            i++;
-        }
-
-        setEntries(preferenceListEntries);
-        setEntryValues(preferenceListEntryValues);
-    }
-
-    {
-        initializeEntryValues();
-    }
-
-    public CustomVideoSpeedListPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomDialogListPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public CustomVideoSpeedListPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomDialogListPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public CustomVideoSpeedListPreference(Context context, AttributeSet attrs) {
+    public CustomDialogListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomVideoSpeedListPreference(Context context) {
+    public CustomDialogListPreference(Context context) {
         super(context);
     }
 
@@ -107,15 +74,15 @@ public final class CustomVideoSpeedListPreference extends ListPreference {
         // Create the custom dialog without OK button.
         Pair<Dialog, LinearLayout> dialogPair = Utils.createCustomDialog(
                 getContext(),
-                getTitle() != null ? getTitle().toString() : "",
-                null,
-                null,
+                getTitle() != null ? getTitle().toString() : "", // Title.
+                null, // No message.
+                null, // No EditText.
                 null, // No OK button text.
                 null, // No OK button action.
                 () -> {}, // Cancel button action (just dismiss).
-                null,
-                null,
-                true
+                null, // No Neutral button text.
+                null, // No Neutral button action.
+                true // Dismiss dialog when onNeutralClick.
         );
 
         Dialog dialog = dialogPair.first;
@@ -128,7 +95,7 @@ public final class CustomVideoSpeedListPreference extends ListPreference {
         );
         listViewParams.setMargins(0, dipToPixels(8), 0, dipToPixels(8));
         int maxHeight = (int) (getContext().getResources().getDisplayMetrics().heightPixels * 0.6);
-        listViewParams.height = maxHeight;
+        listViewParams.height = Math.min(listViewParams.height, maxHeight);
         mainLayout.addView(listView, mainLayout.getChildCount() - 1, listViewParams);
 
         // Handle item click to select value and dismiss dialog.
@@ -147,7 +114,7 @@ public final class CustomVideoSpeedListPreference extends ListPreference {
     }
 
     /**
-     * Custom ArrayAdapter to handle checkmark visibility.
+     * Custom ArrayAdapter to handle custom checkmark visibility.
      */
     private static class CustomArrayAdapter extends ArrayAdapter<CharSequence> {
         private final CharSequence[] entryValues;
